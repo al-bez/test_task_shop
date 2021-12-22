@@ -1,0 +1,12 @@
+
+.wrapper {
+  max-width: 375px;
+  background-color: #0F0F0F;
+  height: 100vh;
+  padding: 0 15px;
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 10px;
+}

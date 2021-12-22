@@ -1,0 +1,31 @@
+.item {
+    max-width: 315x;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    background-color: #1E1E1E;
+    border-radius: 5px;
+    margin: 13px 0px;
+    padding: 0px 5px;
+}
+
+.delete {
+    width: 23px;
+    height: 23px;
+    background-color: #686868;
+    border-radius: 50%;
+    border:none;
+    font-size: 20px;
+}
+
+.text {
+    font-size: 18px;
+    color: #666666;
+    margin: 0 15px 0 0 ;
+}
+
+.item_info {
+    display: flex;
+    align-items: center;
+}

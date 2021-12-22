@@ -1,24 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import AppCSS from './App.module.css';
+import Main from './components/Main/Main';
+import Categories from './components/Categories/Categories';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import products from './datas/clothing.js';
+//localStorage.clear()
+const setShop = (data = []) => {
+  try {
+    localStorage.setItem('shopping', JSON.stringify(data))
+  } catch (e) {
+    alert(e.message)
+  }
+}
+
+const getShop = () => {
+  try {
+    return JSON.parse(localStorage.getItem('shopping')) || []
+  } catch (e) {
+    alert(e.message)
+    return [];
+  }
+}
 
 function App() {
+  const [shopping,setShopping] = useState(getShop)
+
+  const addPurchase = (id) => {
+    const [newPurchase] = products.filter(item => item.id ===id)
+    const updateShopping = [...shopping, {...newPurchase, id:Date.now()}]
+    setShopping(updateShopping)
+    setShop(updateShopping)
+  }
+
+  console.log(shopping);
+
+  const deleteItem = (id) => {
+      const updateShopping = shopping.filter(product => product.id !== id)
+      setShopping(updateShopping)
+    setShop(updateShopping)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <Router>
+          <div className={AppCSS.wrapper}>
+            <Routes>
+              <Route exact path='/' element={<Categories clothing={products} addPurchase={addPurchase}/>} />
+              <Route exact path='/ab' element={<Main clothing={shopping} deleteItem={deleteItem}/>} />
+            </Routes>
+          </div>
+        </Router>
   );
 }
 
